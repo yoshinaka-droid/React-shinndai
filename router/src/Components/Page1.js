@@ -40,7 +40,6 @@ const Page1 = () => {
                     <p>写真たち</p>
                     <p>もっと見る</p>
                     <p>写真たち</p>
-                    <p>写真たち</p>
                     </div>
                     {isMatch = false}
                 </div>
