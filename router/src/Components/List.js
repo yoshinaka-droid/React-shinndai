@@ -24,6 +24,11 @@ const List = [
     Taste: 5, Amount: 4, Price: 3,
     Dist: "自転車15分", Map: "麺匠佐蔵"
   },
+  { Name: "がったぼうず",
+    Genre: "麺",
+    Taste: 5, Amount: 4, Price: 3,
+    Dist: "徒歩10分", Map: "がったぼうず"
+  },
   { Name: "そらや",
     Genre: "麺",
     Taste: 5, Amount: 4, Price: 3,
