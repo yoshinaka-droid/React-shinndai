@@ -30,9 +30,7 @@ const Page1 = () => {
                     <p>ジャンル：{rest.Genre}</p>
                     <span>信大からの距離：{rest.Dist}　</span>
                     <a href={Map}>地図</a>
-                    <div>
-                    <span>支払方法</span>
-                    </div>
+                    <p>支払方法：{rest.Pay}</p>
                     <div>
                     <p>店内の雰囲気</p>
                     <span>写真たち</span>
