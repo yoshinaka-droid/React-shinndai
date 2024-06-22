@@ -20,17 +20,32 @@ const Page1 = () => {
                 <div className="modal" key="modal">
                     <Home />
                     <h1>{rest.Name}</h1>        
-                    <span>総合評価：{Star(Total)}　{Total}</span>
-                    <div>
-                    <p>（内訳）</p>
-                    <p>　味：{Star(rest.Taste)}　{rest.Taste}</p>
-                    <p>　量：{Star(rest.Amount)}　{rest.Amount}</p>
-                    <p>値段：{Star(rest.Price)}　{rest.Price}</p>
-                    </div>
-                    <p>ジャンル：{rest.Genre}</p>
-                    <span>信大からの距離：{rest.Dist}　</span>
-                    <a href={Map}>地図</a>
-                    <p>支払方法：{rest.Pay}</p>
+                    <table>
+                    <tr>
+                        <th>総合評価</th>
+                        <td>{Star(Total)}　{Total}</td>
+                    </tr>
+                    <tr>
+                        <th>（内訳）</th>
+                        <tr>
+                        <tr><td>味</td><td>{Star(rest.Taste)}　{rest.Taste}</td></tr>
+                        <tr><td>量</td><td>{Star(rest.Amount)}　{rest.Amount}</td></tr>
+                        <tr><td>値段</td><td>{Star(rest.Price)}　{rest.Price}</td></tr>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <th>ジャンル</th>
+                        <td>{rest.Genre}</td>
+                    </tr>
+                    <tr>
+                        <th>信大からの距離</th>
+                        <td>{rest.Dist}　<a href={Map}>地図</a></td>
+                    </tr>
+                    <tr>
+                        <th>支払方法</th>
+                        <td>{rest.Pay}</td>
+                    </tr>
+                    </table>
                     <div>
                     <p>店内の雰囲気</p>
                     <span>写真たち</span>
