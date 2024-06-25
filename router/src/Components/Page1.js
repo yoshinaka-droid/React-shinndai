@@ -17,21 +17,24 @@ const Page1 = () => {
                 return(
                 {id}.id===(rest.Name)
                 ? 
-                <div className="modal" key="modal">
+                <div className="detail" key={rest.Name+"detail"}>
                     <Home />
                     <h1>{rest.Name}</h1>        
-                    <table>
+                    <table id="table">
+                    <tbody>
                     <tr>
                         <th>総合評価</th>
                         <td>{Star(Total)}　{Total}</td>
                     </tr>
                     <tr>
-                        <th>（内訳）</th>
-                        <tr>
-                        <tr><td>味</td><td>{Star(rest.Taste)}　{rest.Taste}</td></tr>
-                        <tr><td>量</td><td>{Star(rest.Amount)}　{rest.Amount}</td></tr>
-                        <tr><td>値段</td><td>{Star(rest.Price)}　{rest.Price}</td></tr>
-                        </tr>
+                        <th rowSpan="3">（内訳）</th>
+                        <td>味　　{Star(rest.Taste)}　{rest.Taste}</td>
+                    </tr>
+                    <tr>
+                        <td>量　　{Star(rest.Amount)}　{rest.Amount}</td>
+                    </tr>
+                    <tr>
+                        <td>値段　{Star(rest.Price)}　{rest.Price}</td>
                     </tr>
                     <tr>
                         <th>ジャンル</th>
@@ -45,6 +48,7 @@ const Page1 = () => {
                         <th>支払方法</th>
                         <td>{rest.Pay}</td>
                     </tr>
+                    </tbody>
                     </table>
                     <div>
                     <p>店内の雰囲気</p>

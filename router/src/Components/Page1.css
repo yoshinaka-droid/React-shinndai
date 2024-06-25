@@ -1,5 +1,5 @@
-.modal {
-    margin-left: 15px;
+.detail {
+    margin: 15px;
 }
 
 table {
@@ -17,5 +17,5 @@ table th {
 
 table td {
     padding: 3px 10px;
-    border-bottom: solid 1px;
+    border: solid 1px;
 }
