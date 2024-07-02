@@ -48,6 +48,10 @@ const Detail = () => {
                         <th>支払方法</th>
                         <td>{rest.Pay}</td>
                     </tr>
+                    <tr>
+                        <th>駐車場</th>
+                        <td>{rest.Parking}</td>
+                    </tr>
                     </tbody>
                     </table>
                     <div>
