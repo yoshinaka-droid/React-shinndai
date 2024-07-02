@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import Star from "./Star";
 import List from "./List";
 import Home from "./Home";
-import './Page1.css';
+import './Detail.css';
 
-const Page1 = () => {
+const Detail = () => {
     const { id } = useParams();
     var isMatch = true;
     
@@ -69,4 +69,4 @@ const Page1 = () => {
     );
 };
 
-export default Page1;
+export default Detail;
