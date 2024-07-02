@@ -1,10 +1,15 @@
 .body{
-    /* background-color: #F5FFF5; */
-    margin: 0;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
+    background-color: #F5FFF5;
+    padding: 10px;
+}
+
+.prologue{
+    margin: 10px;
+}
+
+.sort{
+    position: absolute;
+    right: 15px;
 }
 
 .button{
@@ -16,28 +21,24 @@
 
 @media (width <= 600px) {
     .button {
-        /* width: 48.5%; */
         width: calc(50% - 6px);
     }
 }
 
 @media (600px <= width <= 800px) {
     .button {
-        /* width: 32.2%; */
         width: calc(33.3% - 6px);
     }
 }
 
 @media (800px <= width <= 1100px) {
     .button {
-        /* width: 24.1%; */
         width: calc(25% - 6px);
     }
 }
 
 @media (1100px <= width) {
     .button {
-        /* width: 16.1%; */
         width: calc(16.6% - 6px);
     }
 }
