@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+// import { motion } from "framer-motion";
+// import styled from "styled-components";
 
 import List from "./List.js";
 import Star from "./Star.js";
@@ -6,6 +8,12 @@ import './Body.css';
 
 const Body = () => {
   const navigate = useNavigate();
+  // const Box = styled(motion.div)`
+  // width: 80px;
+  // height: 80px;
+  // background: green;
+  // border-radius: 20px;
+// `;
   // var NameList = List.slice();
   // const asc = NameList.sort((a, b) => {
     // if (a.Phonetic > b.Phonetic) {
@@ -33,6 +41,7 @@ const Body = () => {
       {/* {console.log(asc[0])} */}
       {/* {desc()} */}
       </div>
+      {/* <Box animate={{ rotate: -90 }} /> */}
       {List.map((rest) => {
         const total = () => {
           rest.Total=Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10
@@ -42,7 +51,7 @@ const Body = () => {
           <span key={rest.Name + "button"}>
             {total()}
             <button
-              className="button"
+              className="anime-object button"
               key={rest.Name}
               onClick={() => navigate(`/${rest.Name}`)}
             >
