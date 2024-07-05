@@ -50,7 +50,7 @@ const List = [
   { Name: "がね～しゃ", Phonetic: "がねーしゃ",
     Genre: "ご飯物",
     Taste: 5, Amount: 3, Price: 4,
-    Dist: "徒歩20分", Map: "札幌らーめん そらや",
+    Dist: "徒歩20分", Map: "がねいしゃ",
     Pay: "現金", Parking: "なし(徒歩推奨)"
   },
   { Name: "おおぼし(桐)", Phonetic: "おおぼしきり",
