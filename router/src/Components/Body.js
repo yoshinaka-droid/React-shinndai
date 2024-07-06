@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 // import { motion } from "framer-motion";
 // import styled from "styled-components";
@@ -29,6 +30,54 @@ const Body = () => {
       // return 1;
     // }
   // })};
+  const ScrollComponent = ({Name, Total}) => {
+    const ref = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+  
+    useEffect(() => {
+      const currentRef = ref.current;
+
+      const observer = new IntersectionObserver(
+        ([entry], observer) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target); // 要素の観察を停止
+          }
+        },
+        { 
+          threshold: 0.5, // 50%見えたらトリガー
+        }
+      );
+  
+      if (currentRef) {
+        observer.observe(currentRef);
+      }
+  
+      return () => {
+        if (currentRef) {
+          observer.unobserve(currentRef);
+        }
+      };
+    }, []);
+  
+    return (
+      <span
+        ref={ref}
+        className={`scroll-element ${isVisible ? 'in-view' : ''}`}
+      >  
+        <button
+        className="button"
+        key={Name}
+        onClick={() => navigate(`/${Name}`)}
+        >
+          <div key={Name + "index"}>
+            <h2>{Name}</h2>
+            <h3>総合評価：{Star(Total)}</h3>
+          </div>
+        </button>
+      </span>
+    );
+  };
   
   return (
     <div className="body">
@@ -41,7 +90,6 @@ const Body = () => {
       {/* {console.log(asc[0])} */}
       {/* {desc()} */}
       </div>
-      {/* <Box animate={{ rotate: -90 }} /> */}
       {List.map((rest) => {
         const total = () => {
           rest.Total=Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10
@@ -50,16 +98,7 @@ const Body = () => {
         return (
           <span key={rest.Name + "button"}>
             {total()}
-            <button
-              className="anime-object button"
-              key={rest.Name}
-              onClick={() => navigate(`/${rest.Name}`)}
-            >
-              <div key={rest.Name + "index"}>
-                <h2>{rest.Name}</h2>
-                <h3>総合評価：{Star(rest.Total)}</h3>
-              </div>
-            </button>
+            <ScrollComponent Name={rest.Name} Total={rest.Total}/>
           </span>
         )
       })}

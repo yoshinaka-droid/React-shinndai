@@ -21,22 +21,6 @@
     transition: all .2s ease;
 }
 
-/* .anime-object { */
-   /* animation: fade-in linear forwards; クラス名、(開始終了時間)、速度一定、(更新からの時間)、(繰り返しなし)、(再生方向)、適用後スタイル */
-   /* (参照)https://qiita.com/na-suzuki/items/037592b14ee0b2d44278 */
-   /* animation-timeline: view(); */
-/* } */
-  
-  /* アニメーション */
- /* @keyframes fade-in { */
-    /* 0% { */
-      /* transform: translateY(60px); */
-    /* } */
-    /* 20% { */
-      /* transform: translateY(0); */
-    /* } */
-/* } */
-
 @media (width <= 600px) {
     .button {
         width: calc(50% - 6px);
@@ -65,4 +49,13 @@
     background-color: #FFCC66;
     opacity: 0.6;
     transform: scale(1.1) translate(5px);
+}
+
+.scroll-element {
+    opacity: 0;
+    transition: opacity 3s;
+}
+
+.scroll-element.in-view {
+    opacity: 1;
 }
