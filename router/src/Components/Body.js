@@ -86,7 +86,7 @@ const Body = () => {
         className="sort"
         // onClick={()=>{NameList=asc}}
       >ソート</button>
-      <span>今日の夕食は何にする？(適当な文字列)</span>
+      <span>星の数は必ずしも正しい評価とは限りません</span>
       {/* {console.log(asc[0])} */}
       {/* {desc()} */}
       </div>

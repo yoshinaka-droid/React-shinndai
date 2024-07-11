@@ -54,14 +54,6 @@ const Detail = () => {
                     </tr>
                     </tbody>
                     </table>
-                    <div>
-                    <p>店内の雰囲気</p>
-                    <span>写真たち</span>
-                    <p>写真たち</p>
-                    <p>写真たち</p>
-                    <p>もっと見る</p>
-                    <p>写真たち</p>
-                    </div>
                     {isMatch = false}
                 </div>
                 :

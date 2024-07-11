@@ -12,4 +12,5 @@
     background-color: #FFCC66;
     opacity: 0.8;
     transform: scale(1.1) translate(5px);
+    cursor: pointer;
 }
