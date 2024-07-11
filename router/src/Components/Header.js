@@ -1,11 +1,11 @@
-import './Header.css';
+import "./Header.css";
 
 const Header = () => {
-    return (
-        <div className="header">
-            <header>シンダイフード</header>
-        </div>
-    );
+  return (
+    <div className="header">
+      <header>シンダイフード</header>
+    </div>
+  );
 };
 
 export default Header;
