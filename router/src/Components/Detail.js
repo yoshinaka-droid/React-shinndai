@@ -59,7 +59,11 @@ const Detail = () => {
                 </tr>
                 <tr>
                   <th>駐車場</th>
-                  <td>{rest.Parking}</td>
+                  <td>{rest.Parking?"あり":"なし"}</td>
+                </tr>
+                <tr>
+                  <th>駐輪場</th>
+                  <td>{rest.Cycling?"あり":"なし"}</td>
                 </tr>
               </tbody>
             </table>
