@@ -9,27 +9,7 @@ import "./Body.css";
 
 const Body = () => {
   const navigate = useNavigate();
-  // const Box = styled(motion.div)`
-  // width: 80px;
-  // height: 80px;
-  // background: green;
-  // border-radius: 20px;
-  // `;
-  // var NameList = List.slice();
-  // const asc = NameList.sort((a, b) => {
-  // if (a.Phonetic > b.Phonetic) {
-  // return 1;
-  // } else {
-  // return -1;
-  // }
-  // });
-  // const desc = () => {NameList.sort((a, b) => {
-  // if (a.Phonetic > b.Phonetic) {
-  // return -1;
-  // } else {
-  // return 1;
-  // }
-  // })};
+
   const ScrollComponent = ({ Name, Total }) => {
     const ref = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
