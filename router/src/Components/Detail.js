@@ -50,7 +50,7 @@ const Detail = () => {
                 <tr>
                   <th>信大からの距離</th>
                   <td>
-                    {rest.Dist}　<a href={Map}>地図</a>
+                    徒歩{rest.Walk}分　<a href={Map}>地図</a>
                   </td>
                 </tr>
                 <tr>
