@@ -1,16 +1,15 @@
 .home {
-    background-color: #defdde;
-    border-width: 1px;
-    padding: 10px;
-    font-size: calc(10px + 2vmin);
-    position: absolute;
-    right: 15px;
-    
+  background-color: #defdde;
+  border-width: 1px;
+  padding: 10px;
+  font-size: calc(10px + 2vmin);
+  position: absolute;
+  right: 15px;
 }
 
 .home:hover {
-    background-color: #FFCC66;
-    opacity: 0.8;
-    transform: scale(1.1) translate(5px);
-    cursor: pointer;
+  background-color: #ffcc66;
+  opacity: 0.8;
+  transform: scale(1.1) translate(5px);
+  cursor: pointer;
 }
