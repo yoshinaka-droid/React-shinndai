@@ -7,30 +7,25 @@ import './Body.css';
 
 const Body = () => {
   const navigate = useNavigate();
-  var ascList;
-  var descList;
-
-  const asc = () => {
-    const NameList1 = List.slice();
-    return (
-    ascList = NameList1.sort((a, b) => {
+  const [changeDesc,setChangeDesc] = useState(true);
+  const NameList1 = List.slice();
+  const NameList2 = List.slice();
+  var changeList;
+  const ascList = NameList1.sort((a, b) => {
     if (a.Phonetic > b.Phonetic) {
       return 1;
     } else {
       return -1;
     }
-  }))};
+  });
 
-  const desc = () => {
-    const NameList2 = List.slice();
-    return (
-    descList = NameList2.sort((a, b) => {
+  const descList = NameList2.sort((a, b) => {
     if (a.Phonetic < b.Phonetic) {
       return 1;
     } else {
       return -1;
     }
-  }))};
+  });
 
   // (はじめ)ボタンがふわっと表示されるシステム
   const ScrollComponent = ({Name, Total}) => {
@@ -88,14 +83,12 @@ const Body = () => {
       <div className="prologue">
       <button
         className="sort"
-        // onClick={()=>{NameList=asc}}
-      >ソート</button>
-      <span>星の数は必ずしも正しい評価とは限りません</span>
-      {console.log(asc())}
-      {console.log(desc())}
-      {console.log(descList)}
+        onClick={()=>{setChangeDesc(!changeDesc)}}
+      >あいうえお順</button>
+      <span>星の数は作成者の独断と偏見で決まってます。</span>
+      {changeDesc?console.log(changeList=ascList):console.log(changeList=descList)}
       </div>
-      {List.map((rest) => {
+      {changeList.map((rest) => {
         const total = () => {
           rest.Total=Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10
         };
