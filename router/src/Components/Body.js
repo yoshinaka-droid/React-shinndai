@@ -6,11 +6,10 @@ import Star from "./Star.js";
 import './Body.css';
 
 const Body = () => {
-  const navigate = useNavigate();
+  // (はじめ)あいうえお順にソートする機能
   const [changeDesc,setChangeDesc] = useState(true);
   const NameList1 = List.slice();
   const NameList2 = List.slice();
-  var changeList;
   const ascList = NameList1.sort((a, b) => {
     if (a.Phonetic > b.Phonetic) {
       return 1;
@@ -18,7 +17,6 @@ const Body = () => {
       return -1;
     }
   });
-
   const descList = NameList2.sort((a, b) => {
     if (a.Phonetic < b.Phonetic) {
       return 1;
@@ -26,8 +24,11 @@ const Body = () => {
       return -1;
     }
   });
-
+  const changeList = changeDesc ? ascList : descList;
+  // (おわり)あいうえお順にソートする機能
+  
   // (はじめ)ボタンがふわっと表示されるシステム
+  const navigate = useNavigate();
   const ScrollComponent = ({Name, Total}) => {
     const ref = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -81,12 +82,11 @@ const Body = () => {
   return (
     <div className="body">
       <div className="prologue">
-      <button
-        className="sort"
-        onClick={()=>{setChangeDesc(!changeDesc)}}
-      >あいうえお順</button>
-      <span>星の数は作成者の独断と偏見で決まってます。</span>
-      {changeDesc?console.log(changeList=ascList):console.log(changeList=descList)}
+        <button
+          className="sort"
+          onClick={()=>{setChangeDesc(!changeDesc)}}
+        >あいうえお順</button>
+        <span>星の数は作成者の独断と偏見で決まってます。</span>
       </div>
       {changeList.map((rest) => {
         const total = () => {
