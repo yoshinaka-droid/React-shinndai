@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-// import { motion } from "framer-motion";
-// import styled from "styled-components";
 
 import List from "./List.js";
 import Star from "./Star.js";
@@ -9,27 +7,32 @@ import './Body.css';
 
 const Body = () => {
   const navigate = useNavigate();
-  // const Box = styled(motion.div)`
-  // width: 80px;
-  // height: 80px;
-  // background: green;
-  // border-radius: 20px;
-// `;
-  // var NameList = List.slice();
-  // const asc = NameList.sort((a, b) => {
-    // if (a.Phonetic > b.Phonetic) {
-      // return 1;
-    // } else {
-      // return -1;
-    // }
-  // });
-  // const desc = () => {NameList.sort((a, b) => {
-    // if (a.Phonetic > b.Phonetic) {
-      // return -1;
-    // } else {
-      // return 1;
-    // }
-  // })};
+  // var ascList;
+  // var descList;
+
+  // const asc = () => {
+  //   const NameList1 = List.slice();
+  //   return (
+  //   ascList = NameList1.sort((a, b) => {
+  //   if (a.Phonetic > b.Phonetic) {
+  //     return 1;
+  //   } else {
+  //     return -1;
+  //   }
+  // }))};
+
+  // const desc = () => {
+  //   const NameList2 = List.slice();
+  //   return (
+  //   descList = NameList2.sort((a, b) => {
+  //   if (a.Phonetic < b.Phonetic) {
+  //     return 1;
+  //   } else {
+  //     return -1;
+  //   }
+  // }))};
+
+  // (はじめ)ボタンがふわっと表示されるシステム
   const ScrollComponent = ({Name, Total}) => {
     const ref = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -59,11 +62,11 @@ const Body = () => {
         }
       };
     }, []);
-  
+    
     return (
       <span
-        ref={ref}
-        className={`scroll-element ${isVisible ? 'in-view' : ''}`}
+      ref={ref}
+      className={`scroll-element ${isVisible ? 'in-view' : ''}`}
       >  
         <button
         className="button"
@@ -78,6 +81,7 @@ const Body = () => {
       </span>
     );
   };
+  // (おわり)ボタンがふわっと表示されるシステム
   
   return (
     <div className="body">
@@ -87,8 +91,9 @@ const Body = () => {
         // onClick={()=>{NameList=asc}}
       >ソート</button>
       <span>星の数は必ずしも正しい評価とは限りません</span>
-      {/* {console.log(asc[0])} */}
+      {/* {console.log(asc())} */}
       {/* {desc()} */}
+      {/* {console.log(descList)} */}
       </div>
       {List.map((rest) => {
         const total = () => {
