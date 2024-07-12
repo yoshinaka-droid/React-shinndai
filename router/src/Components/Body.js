@@ -6,10 +6,12 @@ import Star from "./Star.js";
 import './Body.css';
 
 const Body = () => {
-  // (はじめ)あいうえお順にソートする機能
+// (はじめ)あいうえお順にソートする機能
   const [changeDesc,setChangeDesc] = useState(true);
+  // sortメソッドは破壊的なのでコピーを使う
   const NameList1 = List.slice();
   const NameList2 = List.slice();
+  // ↓昇順
   const ascList = NameList1.sort((a, b) => {
     if (a.Phonetic > b.Phonetic) {
       return 1;
@@ -17,6 +19,7 @@ const Body = () => {
       return -1;
     }
   });
+  // ↓降順
   const descList = NameList2.sort((a, b) => {
     if (a.Phonetic < b.Phonetic) {
       return 1;
@@ -25,10 +28,11 @@ const Body = () => {
     }
   });
   const changeList = changeDesc ? ascList : descList;
-  // (おわり)あいうえお順にソートする機能
+// (おわり)あいうえお順にソートする機能
   
-  // (はじめ)ボタンがふわっと表示されるシステム
+// (はじめ)ボタンがふわっと表示されるシステム
   const navigate = useNavigate();
+  // ボタンの枠組み(詳細はchatGPT)
   const ScrollComponent = ({Name, Total}) => {
     const ref = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -77,26 +81,28 @@ const Body = () => {
       </span>
     );
   };
-  // (おわり)ボタンがふわっと表示されるシステム
+// (おわり)ボタンがふわっと表示されるシステム
   
   return (
     <div className="body">
+      {/* ボタンの位置を確保するためのもの */}
       <div className="prologue">
+        <span>星の数は作成者の独断と偏見で決まってます。</span>
         <button
           className="sort"
           onClick={()=>{setChangeDesc(!changeDesc)}}
         >あいうえお順</button>
-        <span>星の数は作成者の独断と偏見で決まってます。</span>
       </div>
+      {/* 各店舗の店名と総合評価をボタンの内部に表示 */}
       {changeList.map((rest) => {
-        const total = () => {
-          rest.Total=Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10
-        };
+        // 総合評価(rest.Total)を計算
+        const Total =
+          Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10;
 
         return (
           <span key={rest.Name + "button"}>
-            {total()}
-            <ScrollComponent Name={rest.Name} Total={rest.Total}/>
+            {/* 店名と総合評価を引き渡す */}
+            <ScrollComponent Name={rest.Name} Total={Total}/>
           </span>
         )
       })}

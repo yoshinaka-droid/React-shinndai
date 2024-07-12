@@ -5,17 +5,22 @@ import Home from "./Home";
 import "./Detail.css";
 
 const Detail = () => {
+  // ↓{ id }の中の"id"プロパティを使う(これは現在のドメインを入手するもの)
   const { id } = useParams();
+  // ↓404Pageを表示するかどうかのフラグメント(と店の重複を避けるため)
   var isMatch = true;
 
   return (
     <div key="h1">
       {List.map((rest) => {
+        // 総合評価の計算
         const Total =
           Math.round(((rest.Taste + rest.Amount + rest.Price) * 10) / 3) / 10;
+        // Googleマップへのリンク
         const Map = "https://www.google.co.jp/maps/search/" + rest.Map;
 
-        return { id }.id === rest.Name ? (
+        // isMatchはリストで重複があったときに同じ情報が表示されないようにするもの
+        return { id }.id === rest.Name && isMatch && (
           <div className="detail" key={rest.Name + "detail"}>
             <Home />
             <h1>{rest.Name}</h1>
@@ -69,8 +74,6 @@ const Detail = () => {
             </table>
             {(isMatch = false)}
           </div>
-        ) : (
-          isMatch
         );
       })}
       {isMatch && <h2>私はその店を知りません。</h2>}
