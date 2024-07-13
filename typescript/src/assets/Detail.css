@@ -1,0 +1,21 @@
+.detail {
+    margin: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: solid 2px;
+}
+
+table th {
+    padding: 10px;
+    border: solid 1px;
+    width: 200px;
+    background: #defdde;
+}
+
+table td {
+    padding: 3px 10px;
+    border: solid 1px;
+}
