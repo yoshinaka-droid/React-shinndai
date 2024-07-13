@@ -1,20 +1,22 @@
 // Name:店名、市内に2店舗以上ある場合支店名(地域名)も書く、Phonetic:ふりがな
-// Genre:ご飯物、麺類、そば、パン 自由に設定して良い
+// Genre:1.ご飯物、2.ラーメン、3.そば、4.パン 数字で設定し、'/Components/Detail.js'で変換する
 // Taste:味(なるべく3以上)、Amount:量(多ければ5)、Price:値段(安ければ5、量には関係なく)
-// Dist:徒歩、自転車で何分か、Map:GoogleMapの検索ワード
-// Pay:使える支払い方法一覧　Parking：駐車場
+// Walk:徒歩何分か、HourS:開店時間、HourE:閉店時間
+// Map:GoogleMapの検索ワード
+// Pay:使える支払い方法一覧　Parking：駐車場　Cycling：駐輪場
 
 const List = [
   {
     Name: "でんでん",
     Phonetic: "でんでん",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 4,
     Amount: 5,
     Price: 4,
     Walk: 15,
     HourS: 11,
     HourE: 22,
+    Hour: [11,22],
     Map: "でんでん",
     Pay: "現金、PayPay",
     Parking: true,
@@ -23,7 +25,7 @@ const List = [
   {
     Name: "満月や",
     Phonetic: "まんげつや",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 3,
     Price: 3,
@@ -38,7 +40,7 @@ const List = [
   {
     Name: "メーヤウ(桐)",
     Phonetic: "めーやうきり",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 4,
     Amount: 5,
     Price: 3,
@@ -53,7 +55,7 @@ const List = [
   {
     Name: "メーヤウ(信大前)",
     Phonetic: "めーやうしんだいまえ",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 4,
     Amount: 4,
     Price: 3,
@@ -68,7 +70,7 @@ const List = [
   {
     Name: "麺匠佐蔵",
     Phonetic: "さくら",
-    Genre: "麺",
+    Genre: 2,
     Taste: 5,
     Amount: 4,
     Price: 3,
@@ -83,7 +85,7 @@ const List = [
   {
     Name: "がったぼうず",
     Phonetic: "がったぼうず",
-    Genre: "麺",
+    Genre: 2,
     Taste: 5,
     Amount: 4,
     Price: 3,
@@ -98,7 +100,7 @@ const List = [
   {
     Name: "そらや",
     Phonetic: "そらや",
-    Genre: "麺",
+    Genre: 2,
     Taste: 5,
     Amount: 4,
     Price: 3,
@@ -113,7 +115,7 @@ const List = [
   {
     Name: "がねいしゃ",
     Phonetic: "がねいしゃ",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 3,
     Price: 4,
@@ -128,7 +130,7 @@ const List = [
   {
     Name: "龍華楼",
     Phonetic: "りゅうかろう",
-    Genre: "麺",
+    Genre: 2,
     Taste: 3,
     Amount: 5,
     Price: 4,
@@ -143,7 +145,7 @@ const List = [
   {
     Name: "麺51",
     Phonetic: "めんこい",
-    Genre: "麺",
+    Genre: 2,
     Taste: 4,
     Amount: 5,
     Price: 4,
@@ -158,7 +160,7 @@ const List = [
   {
     Name: "おおぼし(桐)",
     Phonetic: "おおぼしきり",
-    Genre: "麺",
+    Genre: 2,
     Taste: 4,
     Amount: 4,
     Price: 4,
@@ -173,7 +175,7 @@ const List = [
   {
     Name: "エクリュ",
     Phonetic: "えくりゅ",
-    Genre: "パン",
+    Genre: 4,
     Taste: 5,
     Amount: 3,
     Price: 5,
@@ -188,7 +190,7 @@ const List = [
   {
     Name: "紅葉",
     Phonetic: "こうよう",
-    Genre: "麺",
+    Genre: 2,
     Taste: 4,
     Amount: 5,
     Price: 5,
@@ -203,7 +205,7 @@ const List = [
   {
     Name: "潮騒",
     Phonetic: "しおさい",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 4,
     Amount: 5,
     Price: 5,
@@ -218,7 +220,7 @@ const List = [
   {
     Name: "どん八",
     Phonetic: "どんぱち",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 4,
     Price: 4,
@@ -233,7 +235,7 @@ const List = [
   {
     Name: "河昌",
     Phonetic: "かわしょう",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 4,
     Price: 4,
@@ -248,12 +250,11 @@ const List = [
   {
     Name: "楽座",
     Phonetic: "らくざ",
-    Genre: "そば",
+    Genre: 3,
     Taste: 5,
     Amount: 4,
     Price: 4,
-    Dist: "徒歩20分",
-    Walk: 15,
+    Walk: 30,
     HourS: 11,
     HourE: 19,
     Map: "らくざ",
@@ -264,7 +265,7 @@ const List = [
   {
     Name: "ピカドン",
     Phonetic: "ぴかどん",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 4,
     Price: 4,
@@ -279,7 +280,7 @@ const List = [
   {
     Name: "テンホウ",
     Phonetic: "てんほう",
-    Genre: "麺",
+    Genre: 2,
     Taste: 5,
     Amount: 4,
     Price: 4,
@@ -294,7 +295,7 @@ const List = [
   {
     Name: "まんま",
     Phonetic: "まんま",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 4,
     Price: 4,
@@ -309,13 +310,13 @@ const List = [
   {
     Name: "まんぷく亭",
     Phonetic: "まんぷくてい",
-    Genre: "ご飯物",
-    Taste: 5,
+    Genre: 1,
+    Taste: 4,
     Amount: 4,
     Price: 4,
     Walk: 20,
-    HourS: 11,
-    HourE: 19,
+    HourS: 1130,
+    HourE: 1430,
     Map: "まんぷく亭",
     Pay: "現金",
     Parking: true,
@@ -324,7 +325,7 @@ const List = [
   {
     Name: "ビストロ鬼平",
     Phonetic: "びすとろおにへい",
-    Genre: "ご飯物",
+    Genre: 1,
     Taste: 5,
     Amount: 4,
     Price: 4,
@@ -332,6 +333,21 @@ const List = [
     HourS: 11,
     HourE: 19,
     Map: "ビストロ鬼平",
+    Pay: "現金",
+    Parking: true,
+    Cycling: true,
+  },
+  {
+    Name: "鎌倉パスタ",
+    Phonetic: "びすとろおにへい",
+    Genre: 1,
+    Taste: 5,
+    Amount: 4,
+    Price: 4,
+    Walk: 20,
+    HourS: 11,
+    HourE: 20,
+    Map: "鎌倉パスタ　イオンモール松本店",
     Pay: "現金",
     Parking: true,
     Cycling: true,

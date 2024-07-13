@@ -6,8 +6,22 @@ import Star from "./Star.js";
 import './Body.css';
 
 const Body = () => {
+// (はじめ)現在の曜日と時刻を入手
+  // 現在の日時を入手
+  const currentDate = new Date();
+  // 時間が1桁の時、"0X"で表記する関数("5"の時は"05")
+  const formatTime = (val) => ("0" + val).slice(-2);
+  // 上から時・分・秒を入手
+  const hour = formatTime(currentDate.getHours());
+  const min = formatTime(currentDate.getMinutes());
+  const sec = formatTime(currentDate.getSeconds());
+  // 曜日を入手
+  const weekday = ["日","月","火","水","木","金","土"];
+  const day = weekday[currentDate.getDay()];
+// (おわり)現在の曜日と時刻を入手
+
 // (はじめ)あいうえお順にソートする機能
-  const [changeDesc,setChangeDesc] = useState(true);
+  const [ascOrder,setAscOrder] = useState(true);
   // sortメソッドは破壊的なのでコピーを使う
   const NameList1 = List.slice();
   const NameList2 = List.slice();
@@ -27,8 +41,10 @@ const Body = () => {
       return -1;
     }
   });
-  const changeList = changeDesc ? ascList : descList;
+  const orderedList = ascOrder ? ascList : descList;
 // (おわり)あいうえお順にソートする機能
+
+  const orderedList2 = orderedList.filter((rest)=>(rest.HourS<=hour)&&(hour<=rest.HourE));
   
 // (はじめ)ボタンがふわっと表示されるシステム
   const navigate = useNavigate();
@@ -87,14 +103,19 @@ const Body = () => {
     <div className="body">
       {/* ボタンの位置を確保するためのもの */}
       <div className="prologue">
-        <span>星の数は作成者の独断と偏見で決まってます。</span>
+        {/* ↓現在の時刻を表示 */}
+        <span>{day}曜日[{hour}:{min}:{sec}]</span>
+        {orderedList2.map((rest) => <span>{rest.Name}</span>)}
+        <button
+          className="time"
+        >{day}曜日[{hour}:{min}:{sec}]</button>
         <button
           className="sort"
-          onClick={()=>{setChangeDesc(!changeDesc)}}
+          onClick={()=>setAscOrder(!ascOrder)}
         >あいうえお順</button>
       </div>
       {/* 各店舗の店名と総合評価をボタンの内部に表示 */}
-      {changeList.map((rest) => {
+      {orderedList.map((rest) => {
         // 総合評価(rest.Total)を計算
         const Total =
           Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10;
@@ -103,6 +124,8 @@ const Body = () => {
           <span key={rest.Name + "button"}>
             {/* 店名と総合評価を引き渡す */}
             <ScrollComponent Name={rest.Name} Total={Total}/>
+            <p>{rest.Hour}</p>
+            {console.log(rest.Hour)}
           </span>
         )
       })}

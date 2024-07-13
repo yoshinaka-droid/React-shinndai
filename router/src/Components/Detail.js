@@ -10,6 +10,8 @@ const Detail = () => {
   // ↓404Pageを表示するかどうかのフラグメント(と店の重複を避けるため)
   var isMatch = true;
 
+  const GenreList = ["ご飯物","麺類","そば","パン"]
+
   return (
     <div key="h1">
       {List.map((rest) => {
@@ -22,6 +24,7 @@ const Detail = () => {
         // isMatchはリストで重複があったときに同じ情報が表示されないようにするもの
         return { id }.id === rest.Name && isMatch && (
           <div className="detail" key={rest.Name + "detail"}>
+            {/* 「戻る」ボタン */}
             <Home />
             <h1>{rest.Name}</h1>
             <table id="table">
@@ -50,7 +53,7 @@ const Detail = () => {
                 </tr>
                 <tr>
                   <th>ジャンル</th>
-                  <td>{rest.Genre}</td>
+                  <td>{GenreList[rest.Genre-1]}</td>
                 </tr>
                 <tr>
                   <th>信大からの距離</th>

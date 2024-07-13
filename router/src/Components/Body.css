@@ -8,6 +8,12 @@
     margin: 15px;
 }
 
+.time{
+    position: absolute;
+    right: 120px;
+    cursor: pointer;
+}
+
 .sort{
     position: absolute;
     right: 15px;
@@ -15,7 +21,7 @@
 }
 
 .button{
-    background-color: #defdde;
+    background-color: #e1ffe4;
     border-width: 1px;
     border-radius: 10px;
     margin: 3px;
@@ -55,7 +61,7 @@
 
 .scroll-element {
     opacity: 0;
-    transition: opacity 2s;
+    transition: 2s;
 }
 
 .scroll-element.in-view {
