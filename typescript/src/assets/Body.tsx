@@ -13,6 +13,7 @@ const Body = () => {
   const hour = currentDate.getHours();
   const min = currentDate.getMinutes();
   const sec = currentDate.getSeconds();
+  const HourMin = hour * 100 + min;
   // 曜日を入手
   const weekday = ["日","月","火","水","木","金","土"];
   const day = weekday[currentDate.getDay()];
@@ -21,10 +22,10 @@ const Body = () => {
 // (はじめ)あいうえお順にソートする機能
   const [ascOrder,setAscOrder] = useState(true);
   // sortメソッドは破壊的なのでコピーを使う
-  const NameList1 = List.slice();
-  const NameList2 = List.slice();
+  const CopyList1 = List.slice();
+  const CopyList2 = List.slice();
   // ↓昇順
-  const ascList = NameList1.sort((a, b) => {
+  const ascList = CopyList1.sort((a, b) => {
     if (a.Phonetic > b.Phonetic) {
       return 1;
     } else {
@@ -32,7 +33,7 @@ const Body = () => {
     }
   });
   // ↓降順
-  const descList = NameList2.sort((a, b) => {
+  const descList = CopyList2.sort((a, b) => {
     if (a.Phonetic < b.Phonetic) {
       return 1;
     } else {
@@ -42,7 +43,23 @@ const Body = () => {
   const orderedList = ascOrder ? ascList : descList;
 // (おわり)あいうえお順にソートする機能
 
-  const orderedList2 = orderedList.filter((rest)=>(rest.HourS<=hour)&&(hour<=rest.HourE));
+// (はじめ)営業時間外の店をフィルタリング
+  const [filtering,setFiltering] = useState(false);
+  // フィルターしたリストを作る
+  const filteredList = orderedList.filter((rest)=>{
+    // "??"の左がnullまたはundefinedの場合に右の値を返す
+    const Start1 = rest.Opened[0] ?? 2500
+    const End1 = rest.Opened[1] ?? -10
+    const Start2 = rest.Opened[2] ?? 2500
+    const End2 = rest.Opened[3] ?? -10
+    return (
+      // 開店時間１に該当するか、開店時間２に該当するか
+      ((Start1<=HourMin)&&(HourMin<=End1))||((Start2<=HourMin)&&(HourMin<=End2))
+    );
+  });
+  // 上でソートしたリストを使う
+  const finalList = filtering ? filteredList : orderedList
+// (おわり)営業時間外の店をフィルタリング
   
 // (はじめ)ボタンがふわっと表示されるシステム
   const navigate = useNavigate();
@@ -100,24 +117,24 @@ const Body = () => {
     );
   };
 // (おわり)ボタンがふわっと表示されるシステム
-  
+
   return (
     <div className="body">
       {/* ボタンの位置を確保するためのもの */}
       <div className="prologue">
         {/* ↓現在の時刻を表示 */}
         <span>{day}曜日[{hour}:{min}:{sec}]</span>
-        {orderedList2.map((rest) => <span>{rest.Name}</span>)}
         <button
           className="time"
-        >{day}曜日[{hour}:{min}:{sec}]</button>
+          onClick={()=>setFiltering(!filtering)}
+        >{filtering ? "営業中を表示中" : "全店舗表示中"}</button>
         <button
           className="sort"
           onClick={()=>setAscOrder(!ascOrder)}
         >あいうえお順</button>
       </div>
       {/* 各店舗の店名と総合評価をボタンの内部に表示 */}
-      {orderedList.map((rest) => {
+      {finalList.map((rest) => {
         // 総合評価(rest.Total)を計算
         const Total =
           Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10;

@@ -1,5 +1,5 @@
 .header {
-    background-color: #9EEB47;
+    background-color: #85c33e;
     min-height: 13vh;
     display: flex;
     flex-direction: column;
@@ -8,5 +8,5 @@
     font-style: italic;
     font-family: Times New Roman, "ＭＳ Ｐゴシック";
     font-size: calc(20px + 3vmin);
-    color: black;
+    color: white;
 }

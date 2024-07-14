@@ -10,7 +10,7 @@ const Detail = () => {
   // ↓404Pageを表示するかどうかのフラグメント(と店の重複を避けるため)
   var isMatch = true;
 
-  const GenreList = ["ご飯物","麺類","そば","パン"]
+  const GenreList = ["","ご飯物","ラーメン","そば","パスタ","パン"]
 
   return (
     <div key="h1">
@@ -20,6 +20,8 @@ const Detail = () => {
           Math.round(((rest.Taste + rest.Amount + rest.Price) * 10) / 3) / 10;
         // Googleマップへのリンク
         const Map = "https://www.google.co.jp/maps/search/" + rest.Map;
+        // 自転車の時間を徒歩の時間から換算
+        const Cycle = Math.round(rest.Walk / 3)
 
         // isMatchはリストで重複があったときに同じ情報が表示されないようにするもの
         return { id }.id === rest.Name && isMatch && (
@@ -53,12 +55,12 @@ const Detail = () => {
                 </tr>
                 <tr>
                   <th>ジャンル</th>
-                  <td>{GenreList[rest.Genre-1]}</td>
+                  <td>{GenreList[rest.Genre]}</td>
                 </tr>
                 <tr>
                   <th>信大からの距離</th>
                   <td>
-                    徒歩{rest.Walk}分　<a href={Map}>地図</a>
+                    徒歩{rest.Walk}分　自転車{Cycle}分　<a href={Map}>地図</a>
                   </td>
                 </tr>
                 <tr>
@@ -79,7 +81,7 @@ const Detail = () => {
           </div>
         );
       })}
-      {isMatch && <h2>私はその店を知りません。</h2>}
+      {isMatch && <h2>404Page私はその店を知りません。</h2>}
     </div>
   );
 };
