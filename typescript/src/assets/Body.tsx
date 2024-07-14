@@ -126,7 +126,6 @@ const Body = () => {
           <span key={rest.Name + "button"}>
             {/* 店名と総合評価を引き渡す */}
             <ScrollComponent Name={rest.Name} Total={Total}/>
-            <p>{rest.HourS}</p>
           </span>
         )
       })}
