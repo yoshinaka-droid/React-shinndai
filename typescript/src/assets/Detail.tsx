@@ -10,21 +10,19 @@ const Detail = () => {
   // ↓404Pageを表示するかどうかのフラグメント(と店の重複を避けるため)
   var isMatch = true;
 
-  const GenreList = ["","ご飯物","ラーメン","そば","パスタ","パン"]
+  // const GenreList = ["","ご飯物","ラーメン","そば","パスタ","パン"]
 
   return (
     <div key="h1">
       {List.map((rest) => {
         // 総合評価の計算
         const Total =
-          Math.round(((rest.Taste + rest.Amount + rest.Price) * 10) / 3) / 10;
+        Math.round((rest.Score[0]+rest.Score[1]+rest.Score[2])*10/3)/10;
         // Googleマップへのリンク
-        const Map = "https://www.google.co.jp/maps/search/" + rest.Map;
-        // 自転車の時間を徒歩の時間から換算
-        const Cycle = Math.round(rest.Walk / 3)
+        const Map = "https://www.google.co.jp/maps/search/" + rest.Map;        
 
         // isMatchはリストで重複があったときに同じ情報が表示されないようにするもの
-        return { id }.id === rest.Name && isMatch && (
+        return { id }.id === rest.Id && isMatch && (
           <div className="detail" key={rest.Name + "detail"}>
             {/* 「戻る」ボタン */}
             <Home />
@@ -40,40 +38,43 @@ const Detail = () => {
                 <tr>
                   <th rowSpan={3}>（内訳）</th>
                   <td>
-                    味　　{Star(rest.Taste)}　{rest.Taste}
+                    味　　{Star(rest.Score[0])}　{rest.Score[0]}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    量　　{Star(rest.Amount)}　{rest.Amount}
+                    量　　{Star(rest.Score[1])}　{rest.Score[1]}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    値段　{Star(rest.Price)}　{rest.Price}
+                    値段　{Star(rest.Score[2])}　{rest.Score[2]}
                   </td>
                 </tr>
                 <tr>
                   <th>ジャンル</th>
-                  <td>{GenreList[rest.Genre]}</td>
+                  <td>{rest.Genre}</td>
                 </tr>
                 <tr>
                   <th>信大からの距離</th>
                   <td>
-                    徒歩{rest.Walk}分　自転車{Cycle}分　<a href={Map}>地図</a>
+                    徒歩{rest.Cycle * 3}分　自転車{rest.Cycle}分　<a href={Map}>地図</a>
                   </td>
                 </tr>
                 <tr>
                   <th>支払方法</th>
-                  <td>{rest.Pay}</td>
+                  <td>
+                    PayPay:{rest.Pay[0]?"可":"不可"}　
+                    カード:{rest.Pay[1]?"可":"不可"}　
+                    電子マネー:{rest.Pay[2]?"可":"不可"}
+                  </td>
                 </tr>
                 <tr>
-                  <th>駐車場</th>
-                  <td>{rest.Parking?"あり":"なし"}</td>
-                </tr>
-                <tr>
-                  <th>駐輪場</th>
-                  <td>{rest.Cycling?"あり":"なし"}</td>
+                  <th>駐車場・駐輪場</th>
+                  <td>
+                    {rest.Parking[0]?"あり":"なし"}・
+                    {rest.Parking[1]?"あり":"なし"}
+                  </td>
                 </tr>
               </tbody>
             </table>

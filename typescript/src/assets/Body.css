@@ -10,12 +10,6 @@
 
 .time{
     position: absolute;
-    right: 120px;
-    cursor: pointer;
-}
-
-.sort{
-    position: absolute;
     right: 15px;
     cursor: pointer;
 }

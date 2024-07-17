@@ -10,55 +10,51 @@ const Body = () => {
   // 現在の日時を入手
   const currentDate = new Date();
   // 上から時・分・秒を入手
-  const hour = currentDate.getHours();
-  const min = currentDate.getMinutes();
-  const sec = currentDate.getSeconds();
-  const HourMin = hour * 100 + min;
+  const hour: number = currentDate.getHours();
+  const min: number = currentDate.getMinutes();
+  const sec: number = currentDate.getSeconds();
+  const HourMin: number = hour * 100 + min;
   // 曜日を入手
-  const weekday = ["日","月","火","水","木","金","土"];
-  const day = weekday[currentDate.getDay()];
+  const weekday:string[] = ["日","月","火","水","木","金","土"];
+  const day: string = weekday[currentDate.getDay()];
 // (おわり)現在の曜日と時刻を入手
 
-// (はじめ)あいうえお順にソートする機能
-  const [ascOrder,setAscOrder] = useState(true);
+// (はじめ)近い順にソートする機能
   // sortメソッドは破壊的なのでコピーを使う
-  const CopyList1 = List.slice();
-  const CopyList2 = List.slice();
+  const CopyList = List.slice();
   // ↓昇順
-  const ascList = CopyList1.sort((a, b) => {
-    if (a.Phonetic > b.Phonetic) {
+  const distList = CopyList.sort((a, b) => {
+    if (a.Cycle > b.Cycle) {
       return 1;
     } else {
       return -1;
     }
   });
-  // ↓降順
-  const descList = CopyList2.sort((a, b) => {
-    if (a.Phonetic < b.Phonetic) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-  const orderedList = ascOrder ? ascList : descList;
-// (おわり)あいうえお順にソートする機能
+// (おわり)近い順にソートする機能
 
 // (はじめ)営業時間外の店をフィルタリング
-  const [filtering,setFiltering] = useState(false);
-  // フィルターしたリストを作る
-  const filteredList = orderedList.filter((rest)=>{
+  // 「現在営業中」にチェックがあるかどうか
+  const [checkOpen,setcheckOpen] = useState(true);
+  // フィルタしたリストを作る
+  const filteredList = distList.filter((rest)=>{
     // "??"の左がnullまたはundefinedの場合に右の値を返す
-    const Start1 = rest.Opened[0] ?? 2500
-    const End1 = rest.Opened[1] ?? -10
-    const Start2 = rest.Opened[2] ?? 2500
-    const End2 = rest.Opened[3] ?? -10
+    const Start1: number = rest.Opened[0]
+    const End1: number = rest.Opened[1]
+    const Start2: number = rest.Opened[2] ?? 5000
+    const End2: number = rest.Opened[3] ?? -10
+    // const [Start1,End1,Start2,End2] = rest.Opened
+    // ↓開店時間１に該当するか
+    const open1: boolean = (Start1<=HourMin)&&(HourMin<=End1)
+    // ↓開店時間２(が存在するとき)に該当するか　(存在しないときはfalseになる)
+    const open2: boolean = (Start2<=HourMin)&&(HourMin<=End2)
+    // 現在営業時間かどうか
+    const nowOpen: boolean = (open1)||(open2)
+    // リストを営業中の店舗に制限するか
+    const limitOpen: boolean = (nowOpen)||(!checkOpen)
     return (
-      // 開店時間１に該当するか、開店時間２に該当するか
-      ((Start1<=HourMin)&&(HourMin<=End1))||((Start2<=HourMin)&&(HourMin<=End2))
+      limitOpen
     );
   });
-  // 上でソートしたリストを使う
-  const finalList = filtering ? filteredList : orderedList
 // (おわり)営業時間外の店をフィルタリング
   
 // (はじめ)ボタンがふわっと表示されるシステム
@@ -66,9 +62,10 @@ const Body = () => {
   // ボタンの枠組み(詳細はchatGPT)
   type ScrollComponentProps = {
     Name: string;
+    Id: string;
     Total: number;
   };
-  const ScrollComponent: React.FC<ScrollComponentProps> = ({Name, Total}) => {
+  const ScrollComponent: React.FC<ScrollComponentProps> = ({Name, Id, Total}) => {
     const ref = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
   
@@ -106,7 +103,7 @@ const Body = () => {
         <button
         className="button"
         key={Name}
-        onClick={() => navigate(`/${Name}`)}
+        onClick={() => navigate(`/${Id}`)}
         >
           <div key={Name + "index"}>
             <h2>{Name}</h2>
@@ -126,23 +123,22 @@ const Body = () => {
         <span>{day}曜日[{hour}:{min}:{sec}]</span>
         <button
           className="time"
-          onClick={()=>setFiltering(!filtering)}
-        >{filtering ? "営業中を表示中" : "全店舗表示中"}</button>
-        <button
-          className="sort"
-          onClick={()=>setAscOrder(!ascOrder)}
-        >あいうえお順</button>
+          onClick={()=>setcheckOpen(!checkOpen)}
+        >{checkOpen ? "営業中を表示中" : "全店舗表示中"}</button>
+      </div>
+      <div>
+        現在営業中、ジャンル、駐車場、駐輪場
       </div>
       {/* 各店舗の店名と総合評価をボタンの内部に表示 */}
-      {finalList.map((rest) => {
+      {filteredList.map((rest) => {
         // 総合評価(rest.Total)を計算
         const Total =
-          Math.round((rest.Taste+rest.Amount+rest.Price)*10/3)/10;
+          Math.round((rest.Score[0]+rest.Score[1]+rest.Score[2])*10/3)/10;
 
         return (
           <span key={rest.Name + "button"}>
             {/* 店名と総合評価を引き渡す */}
-            <ScrollComponent Name={rest.Name} Total={Total}/>
+            <ScrollComponent Name={rest.Name} Id={rest.Id} Total={Total}/>
           </span>
         )
       })}
